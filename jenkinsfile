@@ -12,7 +12,7 @@ pipeline {
     stages {
             stage('Cloning  BitBucket') {
                 steps {
-                git 'git@github.com:naistangz/Docker_Jenkins_Pipeline.git'
+                git 'git@github.com:Garry2021devops/123.git'
                 }
             }
 
