@@ -1,52 +1,53 @@
-/*****************************************************************
-// Project3 backend 
-******************************************************************/
-pipeline {
-    environment {
-    registry = "garrydevops/test"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-    }
+	/*****************************************************************
+	// Project3 backend 
+	******************************************************************/
+	pipeline {
+		
+		environment {
+			registry = "garrydevops/test"
+			registryCredential = 'dockerhub'
+			dockerImage = ''
+		}
 
-    agent any
-    stages {
-            // stage('Cloning  BitBucket') {
-            //     steps {
-            //     git 'git@github.com:naistangz/Docker_Jenkins_Pipeline.git'
-            //     }
-            // }
+		agent any
+		stages {
+				// stage('Cloning  BitBucket') {
+				//     steps {
+				//     git 'git@github.com:naistangz/Docker_Jenkins_Pipeline.git'
+				//     }
+				// }
 
-            stage('Building Docker Image'){
-                steps {
-                    sh 'pwd'
-                    sh 'll'
-                    script {
-                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                    }
-                }
-            }
+				stage('Building Docker Image'){
+					steps {
+						sh 'pwd'
+						sh 'll'
+						script {
+							dockerImage = docker.build registry + ":$BUILD_NUMBER"
+						}
+					}
+				}
 
-            stage('Deploying Docker Image to Dockerhub'){
-                steps {
-                    script {
-                        docker.withRegistry('', registryCredential) {
-                        dockerImage.push()
-                        }
-                    }
-                }
-            }
+				stage('Deploying Docker Image to Dockerhub'){
+					steps {
+						script {
+							docker.withRegistry('', registryCredential) {
+							dockerImage.push()
+							}
+						}
+					}
+				}
 
-            stage('Cleaning Up'){
-                steps{
-                  sh "docker rmi --force $registry:$BUILD_NUMBER"
-                }
-            }
-                      
-            stage('ssh ec2'){
-                sh "ssh -i xxxx ec2user xxxxx"
-                sh "docker pull image myweb"
-                sh "docker run --name myweb -p 80:3000 -d --restart=always xxxx/myweb:latest"
-           }
-        }
-    
-}
+				stage('Cleaning Up'){
+					steps{
+					sh "docker rmi --force $registry:$BUILD_NUMBER"
+					}
+				}
+						
+				stage('ssh ec2'){
+					sh "ssh -i xxxx ec2user xxxxx"
+					sh "docker pull image myweb"
+					sh "docker run --name myweb -p 80:3000 -d --restart=always xxxx/myweb:latest"
+			}
+		}	
+		
+	}
