@@ -5,7 +5,7 @@
 		
 		environment {
 			registry = "garrydevops/test"
-			registryCredential = 'DockerCredentials'
+			registryCredential = 'dockerhub'
 			dockerImage = ''
 		}
 
