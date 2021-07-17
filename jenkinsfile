@@ -10,21 +10,23 @@ pipeline {
 
     agent any
     stages {
-            stage('Cloning  BitBucket') {
-                steps {
-                git 'git@github.com:Garry2021devops/123.git'
-                }
-            }
+            // stage('Cloning  BitBucket') {
+            //     steps {
+            //     git 'git@github.com:naistangz/Docker_Jenkins_Pipeline.git'
+            //     }
+            // }
 
-            stage('Building Docker Image') {
+            stage('Building Docker Image'){
                 steps {
+                    sh 'pwd'
+                    sh 'll'
                     script {
                         dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     }
                 }
             }
 
-            stage('Deploying Docker Image to Dockerhub') {
+            stage('Deploying Docker Image to Dockerhub'){
                 steps {
                     script {
                         docker.withRegistry('', registryCredential) {
@@ -34,6 +36,17 @@ pipeline {
                 }
             }
 
-           
-
+            stage('Cleaning Up'){
+                steps{
+                  sh "docker rmi --force $registry:$BUILD_NUMBER"
+                }
+            }
+                      
+            stage('ssh ec2'){
+                sh "ssh -i xxxx ec2user xxxxx"
+                sh "docker pull image myweb"
+                sh "docker run --name myweb -p 80:3000 -d --restart=always xxxx/myweb:latest"
+           }
+        }
+    
 }
