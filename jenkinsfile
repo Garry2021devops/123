@@ -43,11 +43,11 @@
 					}
 				}
 						
-				stage('ssh ec2'){
-					sh "ssh -i xxxx ec2user xxxxx"
-					sh "docker pull image myweb"
-					sh "docker run --name myweb -p 80:3000 -d --restart=always xxxx/myweb:latest"
-			}
+				//stage('ssh ec2'){
+					//sh "ssh -i xxxx ec2user xxxxx"
+					//sh "docker pull image myweb"
+					//sh "docker run --name myweb -p 80:3000 -d --restart=always xxxx/myweb:latest"
+			//}
 		}	
 		
 	}
