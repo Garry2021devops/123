@@ -52,8 +52,8 @@
 					   '''					  	
 					}
 					steps{
-   						 sh  docker pull image garrydevops/test
-    						 sh  docker run --name myweb -p 80:3000 -d --restart=always garrydevops/test:latest
+   						 sh  "docker pull image garrydevops/test"
+    						 sh  "docker run --name myweb -p 80:3000 -d --restart=always garrydevops/test:latest"
 					}
 
 				}
