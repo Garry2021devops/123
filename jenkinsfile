@@ -48,7 +48,7 @@
 						sshagent(credentials: ['sshec2']) {
 					sh '''
 						pwd
-						ssh -o StrictHostKeyChecking=no -l -t ec2-user 54.79.179.18 uname -a
+						ssh -o StrictHostKeyChecking=no -l ec2-user 54.79.179.18 uname -a
 					   '''					  	
 					}	
 				}
