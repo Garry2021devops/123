@@ -49,23 +49,14 @@
                     sh '''
                         pwd
                         ssh -o StrictHostKeyChecking=no -l ec2-user 54.79.179.18 uname -a
+                        cd project3
+                        docker pull image garrydevops/test
+                        docker run --name myweb -p 80:3000 -d --restart=always garrydevops/test:latest
                        '''
                         }
 
                     }
-                }
-
-                  stage('building continer'){
-                      steps{
-
-                        sh '''
-                         cd project3
-                          docker pull image garrydevops/test
-                          docker run --name myweb -p 80:3000 -d --restart=always garrydevops/test:latest
-                        '''
-                  }
-
-        }
+                }                  
     }
 }
 
