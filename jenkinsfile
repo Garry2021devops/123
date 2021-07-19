@@ -50,7 +50,7 @@
                         
                         ssh -o StrictHostKeyChecking=no -l ec2-user 52.63.144.138 cd project3
                         ssh -o StrictHostKeyChecking=no -l ec2-user 52.63.144.138 docker rm -f myweb
-                        ssh -o StrictHostKeyChecking=no -l ec2-user 52.63.144.138 docker rmi $(docker images -q)
+                        
                         ssh -o StrictHostKeyChecking=no -l ec2-user 52.63.144.138 docker pull garrydevops/test:"$BUILD_NUMBER"
                         ssh -o StrictHostKeyChecking=no -l ec2-user 52.63.144.138 docker run --name myweb -p 49163:3000 -d --restart=always garrydevops/test:$BUILD_NUMBER
                         
